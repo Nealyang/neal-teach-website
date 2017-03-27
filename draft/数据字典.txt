@@ -1,0 +1,31 @@
+admin_table:
+ID      int
+username    varchar(32)
+password    varchar(64)
+
+class_table://文章分类
+ID      init
+name    varchar(16)
+
+tag_table://文章标签，技术分类
+ID      init
+name    varchar(16)
+
+website_record_table://网站历程
+ID      init
+time    varchar(200)
+content varchar(300)
+
+article_table:
+life_record_table://life
+ID      init
+title   varchar(200)
+summary varchar(500)
+content text
+view_times  init
+comments    init
+time        varchar(32)
+class       varchar(16)
+tag         varchar(16)
+
+

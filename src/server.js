@@ -14,9 +14,6 @@ import configStore from './utils/configureStore'
 import getRoutes from './routes'
 import Html from './utils/Html'
 import config from './config'
-import bodyParser from 'body-parser'
-import multer from 'multer'
-const multerObj = multer({dest:path.join(__dirname,'..','static','upload')});
 import cookieParser from 'cookie-parser'
 import cookieSession from 'cookie-session'
 
@@ -28,10 +25,10 @@ const proxy = httpProxy.createProxyServer({
 });
 
 //解析请求数据
-app.use(bodyParser({
-    extended:false
-}));
-app.use(multer(multerObj.any()));
+// app.use(bodyParser({
+//     extended:false
+// }));
+// app.use(multer(multerObj.any()));
 //设置cookie session
 app.use(cookieParser('Neal_signed'));
 {
@@ -48,7 +45,7 @@ app.use(cookieParser('Neal_signed'));
 
 app.use(compression());
 app.use(Express.static(path.join(__dirname,'..','static')));
-app.use(favicon(path.join(__dirname,'..','static','favicon.icon')));
+app.use(favicon(path.join(__dirname,'..','static','favicon.ico')));
 
 app.use('/api',(req,res)=>{
     proxy.web(req,res,{target:targetUrl})
@@ -95,7 +92,7 @@ app.use((req,res)=>{
         }else{
             res.status(404).send('Not found');
         }
-    })
+    });
 });
 
 app.listen(port, (error) => {

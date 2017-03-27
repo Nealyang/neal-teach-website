@@ -3,34 +3,28 @@
  * 独立的开发服务器
  * 用于在开发环境中实现热更新，生产环境中不需要
  */
-const Express = require('express');
+var Express = require('express');
 
-const webpack = require('webpack');
-const webpackHotMiddleware = require('webpack-hot-middleware');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackConfig = require('./dev.config');
+var webpack = require('webpack');
+var webpackDevMiddleware = require('webpack-dev-middleware');
+var webpackHotMiddleware = require('webpack-hot-middleware');
+var webpackConfig = require('./dev.config');
 
-const config = require('../src/config');
+var app = new Express();
+var port = require('../src/config').port + 1;
 
-const app = new Express();
-const port = config.port+1;
-
-const compiler = webpack(webpackConfig);
-
-app.use(webpackDevMiddleware(compiler,{
-    noInfo:true,
-    publicPath:webpackConfig.output.publicPath
-}));
-
+var compiler = webpack(webpackConfig);
+app.use(webpackDevMiddleware(compiler, {noInfo: true, publicPath: webpackConfig.output.publicPath}));
 app.use(webpackHotMiddleware(compiler));
 
-app.listen(port,function (err) {
-    if(err){
-        console.error(err);
-    }else{
-        console.info(`=====>>>>> Webpack development server is listening on port ${port}`)
+app.listen(port, (error) => {
+    if (error) {
+        console.error(error)
+    } else {
+        console.info(`==> 🚧  Webpack development server listening on port ${port}.`)
     }
 });
+
 
 
 

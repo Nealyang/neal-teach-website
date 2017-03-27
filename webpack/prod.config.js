@@ -24,9 +24,9 @@ module.exports = {
     },
     progress:true,
     plugins:[
-        new ExtractTextPlugin('[name]-[chunkhash].css',{allChunks:true}),
+        new ExtractTextPlugin('[name]-[chunkhash].css', { allChunks: true }),
         new webpack.optimize.DedupePlugin(),//去重
-        new webpack.optimize.OcurrenceOrderPlugin(),
+        new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.optimize.UglifyJsPlugin({
             compress:{
                 warnings:false
@@ -38,6 +38,11 @@ module.exports = {
                 NODE_ENV: '"production"'
             },
             __SERVER__: false
+        }),
+        new webpack.ProvidePlugin({
+            $:'jquery',
+            jQuery:'jquery',
+            "window.jQuery":"jquery"
         })
     ],
     module:{

@@ -24,12 +24,6 @@ const proxy = httpProxy.createProxyServer({
     target:targetUrl
 });
 
-//解析请求数据
-// app.use(bodyParser({
-//     extended:false
-// }));
-// app.use(multer(multerObj.any()));
-//设置cookie session
 app.use(cookieParser('Neal_signed'));
 {
     let arr = [];
@@ -39,7 +33,7 @@ app.use(cookieParser('Neal_signed'));
     app.use(cookieSession({
         keys:arr,
         name:'session_id',
-        maxAge:60*60*1000//60min
+        maxAge:24*60*60*1000//one day
     }));
 }
 
@@ -53,7 +47,7 @@ app.use('/api',(req,res)=>{
 
 app.use((req,res)=>{
 
-    global.__SESSION__ = req.session['user_id'];
+    global.__COOKIE__ = req.get['cookie'];
 
     if(process.env.NODE_ENV !== 'production'){
         webpackIsomorphicTools.refresh()

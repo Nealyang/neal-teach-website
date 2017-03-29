@@ -4,3 +4,4 @@
 export Main from './Main/Main'
 export AdminMain from './admin/AdminMain/AdminMain'
 export AdminLogin from './admin/Login/Login'
+export NotFound from './NotFound/NotFound'

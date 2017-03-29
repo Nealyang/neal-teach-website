@@ -2,7 +2,7 @@
  * Created by Nealyang on 17/3/25.
  */
 import {ASYNC} from 'redux-amrc'
-import {customFetch} from '../../../src/utils/clientUtils'
+import {customFetch} from '../../utils/clientUtils'
 
 export const ADMINLOGIN = ADMINLOGIN;
 
@@ -10,6 +10,7 @@ export function login(username,password) {
     const url = '/admin/login';
     const options = {
         method:'post',
+        credentials: 'include',
         headers:{
             Accept:'application/json',
             'Content-Type':'application/json'

@@ -15,8 +15,8 @@ if (process.env.NODE_ENV === 'production') {
 } else {
     createStoreWithMiddleware = compose(
         applyMiddleware(thunk, asyncMiddleware),
-        typeof window === 'object' &&
-        typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f//启动redux-tools查看state状态
+        typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ?
+            window.devToolsExtension() : f => f//启动redux-tools查看state状态
     )(createStore);
 }
 
@@ -30,7 +30,6 @@ export default function configureStore(initialState) {
             store.replaceReducer(nextRootReducer);
         });
     }
-
     return store;
 }
 

@@ -8,7 +8,7 @@ var WebpackIsomorphicTools = require('webpack-isomorphic-tools');
 
 global.__SERVER__ = true;
 global.__DISABLE_SSR__ = false;
-global.__SESSION__ = null;
+global.__COOKIE__ = null;
 if(process.env.NODE_ENV === 'production'){
     global.webpackIsomorphicTools = new WebpackIsomorphicTools(require('../webpack/webpack-isomorphic-tools'))
         .server(rootDir,function () {

@@ -30,7 +30,8 @@ module.exports = {
         new webpack.optimize.UglifyJsPlugin({
             compress:{
                 warnings:false
-            }
+            },
+            except: ['$super', '$', 'exports', 'require','import']
         }),
         new WebpackIsomorphicTools(require('./webpack-isomorphic-tools')),
         new webpack.DefinePlugin({

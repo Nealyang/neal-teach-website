@@ -5,6 +5,7 @@ import React, {Component, PropTypes} from 'react'
 import * as LoginActions from '../../../actions/admin/login'
 import {connect} from 'react-redux'
 import Helmet from 'react-helmet';
+import {Spin} from '../../../components'
 
 class Login extends Component {
 
@@ -13,12 +14,15 @@ class Login extends Component {
     };
 
     render() {
-        const {login} = this.props;
+        const {login,state} = this.props;
         const style = require('./css/adminLogin.scss');
         return (
             <div className={style.container}>
                 <Helmet title="登录"/>
                 <div>
+                    {
+                        state.async.loadingNumber>1?<Spin/>:<div></div>
+                    }
                     <label>用户名:</label>
                     <br/>
                     <input ref="username" className={style.userInput} name="username" type="text" id="username"
@@ -39,7 +43,7 @@ class Login extends Component {
         event.preventDefault();
         const username = this.refs.username.value;
         const password = this.refs.password.value;
-        this.props.login(username, password)
+        this.props.login(username, password);
     }
 }
 

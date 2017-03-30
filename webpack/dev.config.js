@@ -10,7 +10,7 @@ var assetsPath = path.resolve(projectRootPath, './static/dist');
 var config = require('../src/config');
 
 module.exports = {
-    devtool: 'cheap-eval-source-map',
+    devtool: 'cheap-module-eval-source-map',
     context: projectRootPath,
     entry: [
         'webpack-hot-middleware/client?path=http://localhost:3001/__webpack_hmr',

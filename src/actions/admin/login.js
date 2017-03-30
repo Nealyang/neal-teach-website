@@ -3,6 +3,7 @@
  */
 import {ASYNC} from 'redux-amrc'
 import {customFetch} from '../../utils/clientUtils'
+import {browserHistory} from 'react-router'
 
 export const ADMINLOGIN = ADMINLOGIN;
 
@@ -26,6 +27,10 @@ export function login(username,password) {
             promise:()=>customFetch(url,options)
         }
     }
+}
+
+export function skipPageToIndex() {
+    browserHistory.push('/admin')
 }
 
 

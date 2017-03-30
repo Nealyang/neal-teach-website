@@ -37,7 +37,6 @@ export function customFetch(url,options) {
             credentials: 'same-origin'
         };
     }
-
     return fetch(prefix+url,opt)
         .then(handle401)
         .then(handleErrors)

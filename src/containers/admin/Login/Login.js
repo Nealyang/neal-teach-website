@@ -2,27 +2,27 @@
  * Created by Nealyang on 17/3/24.
  */
 import React, {Component, PropTypes} from 'react'
-import * as LoginActions from '../../../actions/admin/login'
+import {skipPageToIndex,login} from '../../../actions/admin/login'
+import {setConfirmContent} from '../../../actions/common/common'
 import {connect} from 'react-redux'
 import Helmet from 'react-helmet';
-import {Spin} from '../../../components'
+import {bindActionCreators} from 'redux'
 
 class Login extends Component {
 
     static propTypes = {
-        login: PropTypes.func
+        login: PropTypes.func,
+        user:PropTypes.object,
+        skipPageToIndex:PropTypes.func,
+        setConfirmContent:PropTypes.func
     };
 
     render() {
-        const {login,state} = this.props;
         const style = require('./css/adminLogin.scss');
         return (
             <div className={style.container}>
                 <Helmet title="登录"/>
                 <div>
-                    {
-                        state.async.loadingNumber>1?<Spin/>:<div></div>
-                    }
                     <label>用户名:</label>
                     <br/>
                     <input ref="username" className={style.userInput} name="username" type="text" id="username"
@@ -39,19 +39,41 @@ class Login extends Component {
         )
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.user){
+            this.props.skipPageToIndex();
+        }
+    }
+
     handleLogin = (event) => {
         event.preventDefault();
         const username = this.refs.username.value;
         const password = this.refs.password.value;
-        this.props.login(username, password);
+        if(username==="" ||password==="" ){
+            this.props.setConfirmContent('请输入用户、密码！');
+        }else{
+            this.props.login(username, password);
+        }
+
     }
 }
 
+
+const mapStateToProps = (state)=>{
+    return {
+        user:state.admin.async.user
+    }
+};
+
+const mapDispatchToProps =(dispatch)=>{
+    return bindActionCreators({
+        login,
+        skipPageToIndex,
+        setConfirmContent
+    },dispatch)
+};
+
 export default connect(
-    (state)=>{
-         return{
-             state:state
-         }
-    },
-    LoginActions
+    mapStateToProps,
+    mapDispatchToProps
 )(Login);

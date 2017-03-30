@@ -1,0 +1,47 @@
+.container{
+  position: absolute;
+  top: 80px;
+  background: #f7f7f7;
+  width: 243px;
+  padding-top: 40px;
+  height: 84%;
+  display: flex;
+  flex-direction: column;
+  p{
+    background: #fdfdfd;
+    position: absolute;
+    width: 243px;
+    left: 0;
+    top:0;
+    height: 40px;
+    line-height: 40px;
+    padding:0 21px ;
+  }
+  ul{
+    padding-top: 10px;
+    span{
+      margin-left: 20px;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    li{
+      height: 38px;
+      line-height: 38px;
+      padding-left: 40px;
+      cursor: pointer;
+    }
+    li:hover{
+      background: #e6e6e6;
+    }
+    img{
+      position: absolute;
+      width: 6%;
+      right: 23px;
+      margin-top: 6px;
+    }
+  }
+  li:last-child{
+    margin-bottom: 10px;
+  }
+
+}

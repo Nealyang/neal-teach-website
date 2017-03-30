@@ -16,10 +16,10 @@ React技术栈：398240621
 
 ---
 
-##整体说明
+## 整体说明
 一个网站的应用，服务器开发阶段分为三个：发送页面服务器，API服务器，资源服务器。生产环境服务器分为页面服务器和API服务器。
 
-##项目架构如图
+## 项目架构如图
 
 ![项目架构图](lib/1.0/framework.png)
 
@@ -40,7 +40,7 @@ OK，这里简单说明下
 
 下面一个一个的介绍
 
-##同构配置文件：webpack-isomorphic-tools.js
+## 同构配置文件：webpack-isomorphic-tools.js
     var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
     
     var config = {
@@ -78,7 +78,7 @@ OK，这里简单说明下
 因为需要用到Universal渲染，所以需要同构一下require的能力，这里配置很简单，但是这里对options.development判断了环境
 
 如果是开发环境，则返回适用于style-loader,css-loader的返回值，如果是在生产环境中，则提取单独的样式文件，所以就让他直接返回默认值。
-##项目配置文件：src/config.js
+## 项目配置文件：src/config.js
     module.exports = {
         host:process.env.HOST || 'localhost',
         port:process.env.PORT || (process.env.NODE_ENV === 'production'?8080:3000),
@@ -102,8 +102,8 @@ OK，这里简单说明下
 
 对于端口什么的经常变动就经常使用的变量，我们这里单独的提取出来了。并且配置了默认的HTML页面header信息
 
-##开发服务器
-###开发环境下的webpack配置：dev.cofig.js
+## 开发服务器
+### 开发环境下的webpack配置：dev.cofig.js
     var path = require('path');
     var webpack = require('webpack');
     var autoprefixer = require('autoprefixer');
@@ -179,7 +179,7 @@ OK，这里简单说明下
 
 别的一般都是常规配置。
 
-###资源服务器 webpack-dev-server.js
+### 资源服务器 webpack-dev-server.js
     var Express = require('express');
     
     var webpack = require('webpack');
@@ -208,7 +208,7 @@ OK，这里简单说明下
 
     "watch-client": "node webpack/webpack-dev-server"
     
-##前端页面服务器
+## 前端页面服务器
     
     import path from 'path'
     import Express from 'express'
@@ -318,7 +318,7 @@ http-proxy：将API服务器代理到前端服务器上，主要用于解决跨�
 
 这里我们将HTML字符串但是抽到一个组件上来，用于实现Universal的渲染
 
-##使用组件渲染HTML页面
+## 使用组件渲染HTML页面
 
     import React, { PropTypes } from 'react';
     import ReactDOM from 'react-dom/server';
@@ -380,7 +380,7 @@ http-proxy：将API服务器代理到前端服务器上，主要用于解决跨�
 
 由于前端页面服务器开发环境下和生产环境下需求是不同的，所以这里我们需要单独的写一个文件来启动开发服务器
 
-##启动前端服务器
+## 启动前端服务器
 
     const path = require('path');
     const rootDir = path.resolve(__dirname,'..');
@@ -413,7 +413,7 @@ http-proxy：将API服务器代理到前端服务器上，主要用于解决跨�
     
 由于windows不支持NODE_ENV...所以这里使用一个第三方插件cross-env，然后使用nodemon代替node，是为了在每一次修改完代码不需要手动重启服务器了。提高开发效率
 
-##API服务器
+## API服务器
 其实就是所谓的真正的后端
 
     import Express from 'express'
@@ -455,7 +455,7 @@ http-proxy：将API服务器代理到前端服务器上，主要用于解决跨�
         }
     });
     
-##启动API服务器：
+## 启动API服务器：
 
     if(process.env.NODE_ENV==='production'){
         require('../build/api/api');
@@ -471,7 +471,7 @@ http-proxy：将API服务器代理到前端服务器上，主要用于解决跨�
     
 使用nodemon监控src/api文件的变化，然后启动bin/api.js注意这里的js不能省略。
 
-##生产环境下运行nodejs
+## 生产环境下运行nodejs
 启动命令：
 
     "clean": "rimraf build static/dist",
@@ -479,7 +479,7 @@ http-proxy：将API服务器代理到前端服务器上，主要用于解决跨�
     "start-api-prod": "cross-env NODE_ENV=production node bin/api.js"
 
 
-##生产环境下的编译和配置：
+## 生产环境下的编译和配置：
 
     const path = require('path');
     const webpack = require('webpack');
@@ -562,11 +562,11 @@ http-proxy：将API服务器代理到前端服务器上，主要用于解决跨�
     
 这里concurrently，命令平行启动，注意使用引号单独的隔开每一个命令，否则会每一个单词独立运行
 
-##最后
+## 最后
 整体的架构大概就是如此，初次意外还有在utils文件夹下的一些工具文件，当然，这些我们完全可以自定义。
 
 
-##缺陷
+## 缺陷
 
 目前只是第一版本，后续可能随着项目经验的累积会再对这些架构的重构，还有版本用的不是最新的版本，比如webpack用的还是1.0的版本，后续都会再优化改进。
 

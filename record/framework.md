@@ -1,4 +1,4 @@
-#网站代码架构记录1.0
+# 网站代码架构记录1.0
 
 ##所需技术
 react、es6、webpack、babel、react-redux、redux、react-router、nodejs...

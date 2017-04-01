@@ -5,15 +5,17 @@ import React,{Component,PropTypes} from 'react'
 import {Sidebar} from '../../../components'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+import {selectNavigation} from '../../../actions/admin/navigation'
 
 class AdminMain extends Component{
+
     render(){
         const style = require('./css/adminMain.scss');
-        const {user} = this.props;
+        const {user,nav,selectNavigation} = this.props;
         return(
             <div>
                 {
-                    user?<Sidebar/>:<span></span>
+                    user?<Sidebar nav={nav} selectNavigation={selectNavigation}/>:<span></span>
                 }
                 <div className={style.adminHeader}>
                     <img src={require('./img/logo.png')}  alt="Neal-teach"/>
@@ -26,10 +28,17 @@ class AdminMain extends Component{
 
 const mapStateToProps = (state)=>{
     return{
-        user:state.admin.async.user
+        user:state.admin.async.user,
+        nav:state.admin.nav
     }
 };
 
-export default connect(mapStateToProps)(AdminMain)
+const mapDispatchToProps = (dispatch)=>{
+    return bindActionCreators({
+        selectNavigation
+    },dispatch)
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(AdminMain)
 
 

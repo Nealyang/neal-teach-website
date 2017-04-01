@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import {Route, IndexRoute} from 'react-router';
-import {Main, AdminMain, AdminLogin,NotFound} from './containers';
+import {Main, AdminMain, AdminLogin,NotFound,Issue} from './containers';
 import {loadAuthIfNeeded} from './actions/admin/auth'
 
 const preload = promise => (nextState, replace, cb) => {
@@ -36,6 +36,7 @@ export default store => {
             <Route path="admin" component={AdminMain} onEnter={requireLogin}>
                 <Route onEnter={requireLogin}>
                     <Route path="login" component={AdminLogin} onEnter={judgeLogin}/>
+                    <Route path="issue" component={Issue}/>
                 </Route>
             </Route>
             <Route path="*" component={NotFound} status={404}/>

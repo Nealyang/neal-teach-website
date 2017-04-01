@@ -30,7 +30,7 @@ export function login(username,password) {
 }
 
 export function skipPageToIndex() {
-    browserHistory.push('/admin')
+    browserHistory.push('/admin/issue')
 }
 
 

@@ -46,7 +46,10 @@ module.exports = {
                     presets: ['react-hmre']
                 }
             },
-            { test: /\.(jpeg|jpg|png|gif)$/, loader: 'url-loader?limit=10240' },
+            {
+                test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
+                loader: 'url-loader?limit=50000&name=[path][name].[ext]'
+            },
             {
                 test: /\.css$/,
                 loaders: [
